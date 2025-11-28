@@ -15,7 +15,7 @@ on:
         required: false
         default: 'https://playify.pages.dev/Jiotv.json'
       target_branch:
-        description: 'Branch to commit the tamil.m3u to'
+        description: 'Branch to commit the Test.m3u to'
         required: false
         default: 'main'
   schedule:
@@ -29,7 +29,7 @@ jobs:
 
     steps:
       - name: Checkout target branch
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.event.inputs.target_branch || 'main' }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -41,24 +41,54 @@ jobs:
         name: Generate Test.m3u
         env:
           JSON_URL: ${{ github.event.inputs.json_url || 'https://playify.pages.dev/Jiotv.json' }}
-          TARGET_COUNT: '12'
         run: |
           set -euo pipefail
+
+          # 1. Define the Target List (JSON Syntax Fixed)
+          TARGET_CHANNELS='[
+            {"name": "KTV HD", "group": "Movies"},
+            {"name": "Raj News Tamil", "group": "News"},
+            {"name": "Sonic Hindi", "group": "Kids"},
+            {"name": "Cartoon Network Hindi", "group": "Kids"},
+            {"name": "Nickelodeon Hindi", "group": "Kids"},
+            {"name": "Discovery Tamil", "group": "Regional Tamil"},
+            {"name": "Pogo Hindi", "group": "Kids"},
+            {"name": "Tamil Janam", "group": "News"},
+            {"name": "Jaya Plus", "group": "News"},
+            {"name": "Animal Planet HD", "group": "Infotainment"},
+            {"name": "Eurosport HD", "group": "Sports"},
+            {"name": "Nick Jr", "group": "Kids"},
+            {"name": "Discovery HD World", "group": "Infotainment"},
+            {"name": "Jaya TV HD", "group": "Regional Tamil"},
+            {"name": "Raj TV", "group": "Regional Tamil"},
+            {"name": "Sun Music HD", "group": "Regional Tamil"},
+            {"name": "Jaya Max", "group": "Regional Tamil"},
+            {"name": "Sun Life", "group": "Regional Tamil"},
+            {"name": "Travelxp Tamil", "group": "Regional Tamil"}
+          ]'
+
+          # 2. Calculate count dynamically
+          TARGET_COUNT=$(echo "$TARGET_CHANNELS" | jq length)
+          echo "🎯 Target Channel Count: $TARGET_COUNT"
+
+          # 3. Fetch Source JSON
           echo "📥 Fetching JSON from: $JSON_URL"
           JSON=$(curl -fsSL --max-time 30 \
             -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" \
             -H "Accept: application/json" \
             -H "Referer: https://playify.pages.dev/" \
             "$JSON_URL") || { echo "❌ Failed to fetch JSON (curl error)"; exit 1; }
+          
           if [ -z "$JSON" ] || [ "${JSON:0:1}" = "<" ]; then
             echo "❌ Response is empty or looks like HTML"
             exit 1
           fi
 
+          # 4. Create M3U File
           echo "#EXTM3U" > Test.m3u
 
-          # Updated channel target list (from your input)
-          echo "$JSON" | jq -r '
+          # 5. Process JSON with jq (Using Dynamic Groups)
+          echo "$JSON" | jq -r --argjson list "$TARGET_CHANNELS" '
             def channels:
               if type == "array" then .
               elif type == "object" then
@@ -70,46 +100,43 @@ jobs:
                 end
               else []
               end;
-            [
-              "KTV HD",
-              "Tamil Janam",
-              "Raj News Tamil",
-              "Jaya Plus",
-              "Animal Planet HD",
-              "Discovery HD",
-              "Eurosport HD",
-              "Nick Jr",
-              "Sonic Tamil",
-              "Pogo Tamil",
-              "Cartoon Network",
-              "Nick Tamil"
-            ] as $list |
+            
             channels as $all |
-            $list[] as $target |
-            ($all | map(select((.name // .title // "") | ascii_downcase == ($target | ascii_downcase)) ) | .[0]) as $match |
+            $list[] as $target_obj |
+            $target_obj.name as $target_name |
+            $target_obj.group as $target_group | 
+            
+            # Find match case-insensitive
+            ($all | map(select((.name // .title // "") | ascii_downcase == ($target_name | ascii_downcase)) ) | .[0]) as $match |
+            
             if ($match | type == "object") and ($match.link // $match.url // "") != "" then
               $match |
-              (.name // .title // $target) as $name |
+              (.name // .title // $target_name) as $name |
               (.tvg_id // .tvgId // .id // "") as $tvg_id |
               (.tvg_logo // .logo // .icon // "") as $tvg_logo |
               (.drmScheme // .drm_scheme // .drm // "") as $drmScheme |
               (.drmLicense // .license // "") as $drmLicense |
               (.cookie // .cookies // "") as $cookie |
               (.link // .url // .stream_url // .hls // .mpd // "") as $link |
+              
               "#EXTINF:-1 " +
                 (if ($tvg_id | length > 0) then "tvg-id=\"\($tvg_id)\" " else "" end) +
-                "group-title=\"Tamil\" " +
+                "group-title=\"\($target_group)\" " +
                 (if ($tvg_logo | length > 0) then "tvg-logo=\"\($tvg_logo)\" " else "" end) +
                 ",\($name | gsub(","; "\\,"))" |
               . as $extinf |
+              
               (if ($drmScheme == "clearkey") and ($drmLicense | test("^[a-zA-Z0-9]+:[a-zA-Z0-9]+")) then
                 "#KODIPROP:inputstream.adaptive.license_type=clearkey\n#KODIPROP:inputstream.adaptive.license_key=" +
                 ($drmLicense | split(":")[0:2] | join(":"))
               else "" end) as $drm |
+              
               "#EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69" as $ua |
+              
               (if ($cookie | length > 0) then
                 "#EXTHTTP:{\"cookie\":\"" + ($cookie | gsub("\""; "\\\"")) + "\"}"
               else "" end) as $cookie_line |
+              
               [
                 $extinf,
                 ($drm | select(. != "")),
@@ -119,28 +146,31 @@ jobs:
               ] | join("\n")
             else empty end
           ' >> Test.m3u
-          # Final report
+
+          # 6. Reporting
           TOTAL=$(grep -c "^#EXTINF" Test.m3u || echo 0)
-          echo "✅ tamil.m3u created: $TOTAL / 31 channels found"
-          if [ "$TOTAL" -gt 0 ]; then
-            echo "📋 Channels included:"
-            grep "^#EXTINF" Test.m3u | sed 's/.*,//'
-          else
-            echo "❌ None of the 31 channels were found in Ziotv.json"
-            echo "🔍 Top 20 channel names in JSON:"
-            echo "$JSON" | jq -r 'channels | .[0:20][] | .name // .title // "–"' 2>/dev/null
-            exit 1
-          fi
+          echo "✅ Test.m3u created: $TOTAL / $TARGET_COUNT channels found"
+          
+          # Output to GITHUB_OUTPUT
+          echo "total_channels=$TOTAL" >> "$GITHUB_OUTPUT"
+          echo "target_count=$TARGET_COUNT" >> "$GITHUB_OUTPUT"
+
       - name: Commit & Push
+        env:
+          TARGET_BRANCH: ${{ github.event.inputs.target_branch || 'main' }}
+          TOTAL: ${{ steps.generate.outputs.total_channels }}
+          TARGET_COUNT: ${{ steps.generate.outputs.target_count }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add Test.m3u
+          
+          # Only commit if there are changes
           if git diff --cached --quiet; then
-            echo "➡️ No changes — skipping commit"
+            echo "➡️ No changes detected — skipping commit"
             exit 0
           fi
-          git commit -m "✅ Auto-update Tamil M3U: $TOTAL/31 channels | $(date -u '+%Y-%m-%d %H:%M')"
-          git push origin main
-
+          
+          git commit -m "✅ Auto-update Tamil M3U: $TOTAL/$TARGET_COUNT channels | $(date -u '+%Y-%m-%d %H:%M')"
+          git push origin "HEAD:${TARGET_BRANCH}"
           
