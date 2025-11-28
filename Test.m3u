@@ -5,21 +5,21 @@
 #EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
 #EXTHTTP:{"cookie":"__hdnea__=st=1764304207~exp=1764390607~acl=/*~hmac=5f936234ecfaed0b2d7349facc80b7e77ee007b65e037d99f96d6764dadc1b55"}
 https://jiotvbpkmob.cdn.jio.com/bpk-tv/KTV_HD_MOB/WDVLive/index.mpd
-#EXTINF:-1 group-title="Kids" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/sonic_Hindi.png" ,Sonic
+#EXTINF:-1 group-title="Kids" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/sonic_Hindi.png" ,Sonic Hindi
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=fdf348b106045794a5ab265d08c677ef:83f7bddd4290a229e07c62c6b78f1e74
 #EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
 #EXTHTTP:{"cookie":"__hdnea__=st=1764304207~exp=1764390607~acl=/*~hmac=5f936234ecfaed0b2d7349facc80b7e77ee007b65e037d99f96d6764dadc1b55"}
 https://jiotvbpkmob.cdn.jio.com/bpk-tv/sonic_Hindi_BTS/output/index.mpd
-#EXTINF:-1 group-title="Kids" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Cartoon_Network_Hindi.png" ,Cartoon Network
+#EXTINF:-1 group-title="Kids" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Cartoon_Network_Hindi.png" ,Cartoon Network Hindi
 #KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=ea48cf7b24dd54dd98c369626b9ad105:ee5778d627dfae2c2affc02d76e8db6c
+#KODIPROP:inputstream.adaptive.license_key=3e5ec63e26c1520380236941c3848f68:f944e7ee9260a9e6239170db4d6fa713
 #EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
 #EXTHTTP:{"cookie":"__hdnea__=st=1764304207~exp=1764390607~acl=/*~hmac=5f936234ecfaed0b2d7349facc80b7e77ee007b65e037d99f96d6764dadc1b55"}
 https://jiotvbpkmob.cdn.jio.com/bpk-tv/Cartoon_Network_Hindi_MOB/WDVLive/index.mpd
-#EXTINF:-1 group-title="Kids" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Pogo_Hindi.png" ,Pogo
+#EXTINF:-1 group-title="Kids" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Pogo_Hindi.png" ,Pogo Hindi
 #KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=4b967f351139503a88b1d1945203150b:c3e26279cc513e13154958f934141dc0
+#KODIPROP:inputstream.adaptive.license_key=e00e2372e66056d99642254b92bcf53e:70dc00e600e4a4c16afc0148ad2e8881
 #EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
 #EXTHTTP:{"cookie":"__hdnea__=st=1764304207~exp=1764390607~acl=/*~hmac=5f936234ecfaed0b2d7349facc80b7e77ee007b65e037d99f96d6764dadc1b55"}
 https://jiotvbpkmob.cdn.jio.com/bpk-tv/Pogo_Hindi_MOB/WDVLive/index.mpd
@@ -35,12 +35,12 @@ https://jiotvbpkmob.cdn.jio.com/bpk-tv/Janam_Tamil_BTS/output/index.mpd
 #EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
 #EXTHTTP:{"cookie":"__hdnea__=st=1764304207~exp=1764390607~acl=/*~hmac=5f936234ecfaed0b2d7349facc80b7e77ee007b65e037d99f96d6764dadc1b55"}
 https://jiotvbpkmob.cdn.jio.com/bpk-tv/Jaya_Plus_BTS/output/index.mpd
-#EXTINF:-1 group-title="Infotainment" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Animal_Planet_HD.png" ,Animal Planet HD World
+#EXTINF:-1 group-title="Infotainment" tvg-logo="https://img.media.jio.com/imagespublic/42/63/301583_1703067829443_l_high.jpg" ,Animal Planet HD World
 #KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=ff6ca7035f7d51609b43960e3b88fc94:e2c4e61e32022885f6ccb9215b60dad4
+#KODIPROP:inputstream.adaptive.license_key=2e5b244dece4589e8cb63c3f78599b8b:d0bf0aea980e46b12a38f8004505e2fe
 #EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
 #EXTHTTP:{"cookie":"__hdnea__=st=1764304207~exp=1764390607~acl=/*~hmac=5f936234ecfaed0b2d7349facc80b7e77ee007b65e037d99f96d6764dadc1b55"}
-https://jiotvbpkmob.cdn.jio.com/bpk-tv/Animal_Planet_HD_MOB/WDVLive/index.mpd
+https://jiotvbpkmob.cdn.jio.com/bpk-tv/Animal_Planet_HD_BTS/output/index.mpd
 #EXTINF:-1 group-title="Sports" tvg-logo="https://img.media.jio.com/imagespublic/16/0/301591_1703069891965_l_high.jpg" ,Eurosport HD
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=14fc31f9d832509c9f7cdd77e622e30b:a884515f4e1dd77f07aa100ccec13388
