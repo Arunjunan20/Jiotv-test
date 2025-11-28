@@ -1,0 +1,24 @@
+#EXTINF:-1 group-title="Regional Tamil" tvg-logo="https://img.media.jio.com/imagespublic/36/39/301586_1703068639388_l_high.jpg" ,D Tamil
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=b6fbfa48ce125c8c8f46004da232e956:fb3181695d57614995f6025d41a1dbe2
+#EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
+#EXTHTTP:{"cookie":"__hdnea__=st=1764304207~exp=1764390607~acl=/*~hmac=5f936234ecfaed0b2d7349facc80b7e77ee007b65e037d99f96d6764dadc1b55"}
+https://jiotvbpkmob.cdn.jio.com/bpk-tv/Discovery_Channel_Tamil_BTS/output/index.mpd
+#EXTINF:-1 group-title="Kids" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/sonic_Tamil.png" ,Sonic
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=a62d4ca4ef095564bede0fe525956634:5e34a5126bfe29c18947046513f18cce
+#EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
+#EXTHTTP:{"cookie":"__hdnea__=st=1764304207~exp=1764390607~acl=/*~hmac=5f936234ecfaed0b2d7349facc80b7e77ee007b65e037d99f96d6764dadc1b55"}
+https://jiotvbpkmob.cdn.jio.com/bpk-tv/sonic_Hindi_MOB/WDVLive/index.mpd
+#EXTINF:-1 group-title="Kids" tvg-logo="https://img.media.jio.com/imagespublic/22/35/301584_1707144670480_l_high.jpg" ,Pogo
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=4b967f351139503a88b1d1945203150b:c3e26279cc513e13154958f934141dc0
+#EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
+#EXTHTTP:{"cookie":"__hdnea__=st=1764304207~exp=1764390607~acl=/*~hmac=5f936234ecfaed0b2d7349facc80b7e77ee007b65e037d99f96d6764dadc1b55"}
+https://jiotvbpkmob.cdn.jio.com/bpk-tv/Pogo_Hindi_BTS/output/index.mpd
+#EXTINF:-1 group-title="Kids" tvg-logo="https://img.media.jio.com/imagespublic/27/39/301585_1707144331370_l_high.jpg" ,Cartoon Network
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=ea48cf7b24dd54dd98c369626b9ad105:ee5778d627dfae2c2affc02d76e8db6c
+#EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
+#EXTHTTP:{"cookie":"__hdnea__=st=1764304207~exp=1764390607~acl=/*~hmac=5f936234ecfaed0b2d7349facc80b7e77ee007b65e037d99f96d6764dadc1b55"}
+https://jiotvbpkmob.cdn.jio.com/bpk-tv/Cartoon_Network_Hindi_BTS/output/index.mpd
