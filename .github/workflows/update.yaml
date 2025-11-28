@@ -19,13 +19,15 @@ on:
         required: false
         default: 'main'
   schedule:
-    - cron: '*/30 * * * *'
+    # UPDATED: Run every 3 hours (at minute 0)
+    - cron: '0 */3 * * *'
 
 jobs:
   update:
     runs-on: ubuntu-latest
     outputs:
       total_channels: ${{ steps.generate.outputs.total_channels }}
+      target_count: ${{ steps.generate.outputs.target_count }}
 
     steps:
       - name: Checkout target branch
@@ -44,7 +46,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          # 1. Define the Target List (JSON Syntax Fixed)
+          # 1. Define the Target List
           TARGET_CHANNELS='[
             {"name": "KTV HD", "group": "Movies"},
             {"name": "Raj News Tamil", "group": "News"},
@@ -87,7 +89,7 @@ jobs:
           # 4. Create M3U File
           echo "#EXTM3U" > Test.m3u
 
-          # 5. Process JSON with jq (Using Dynamic Groups)
+          # 5. Process JSON with jq (BTS Priority + Dynamic Groups)
           echo "$JSON" | jq -r --argjson list "$TARGET_CHANNELS" '
             def channels:
               if type == "array" then .
@@ -106,8 +108,12 @@ jobs:
             $target_obj.name as $target_name |
             $target_obj.group as $target_group | 
             
-            # Find match case-insensitive
-            ($all | map(select((.name // .title // "") | ascii_downcase == ($target_name | ascii_downcase)) ) | .[0]) as $match |
+            # MATCHING LOGIC: Finds matches and sorts them so "BTS" links come first
+            ($all | 
+             map(select((.name // .title // "") | ascii_downcase == ($target_name | ascii_downcase))) | 
+             sort_by(if (.link | contains("BTS")) then 0 else 1 end) | 
+             .[0]
+            ) as $match |
             
             if ($match | type == "object") and ($match.link // $match.url // "") != "" then
               $match |
@@ -151,7 +157,6 @@ jobs:
           TOTAL=$(grep -c "^#EXTINF" Test.m3u || echo 0)
           echo "✅ Test.m3u created: $TOTAL / $TARGET_COUNT channels found"
           
-          # Output to GITHUB_OUTPUT
           echo "total_channels=$TOTAL" >> "$GITHUB_OUTPUT"
           echo "target_count=$TARGET_COUNT" >> "$GITHUB_OUTPUT"
 
@@ -165,7 +170,6 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add Test.m3u
           
-          # Only commit if there are changes
           if git diff --cached --quiet; then
             echo "➡️ No changes detected — skipping commit"
             exit 0
