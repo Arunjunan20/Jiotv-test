@@ -1,0 +1,158 @@
+name: Auto-Update Tamil M3U
+
+concurrency:
+  group: auto-update-tamil-m3u
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+    inputs:
+      json_url:
+        description: 'JSON URL to fetch (overrides default)'
+        required: false
+        default: 'https://playify.pages.dev/Jiotv.json'
+      target_branch:
+        description: 'Branch to commit the tamil.m3u to'
+        required: false
+        default: 'main'
+  schedule:
+    - cron: '*/30 * * * *'
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    outputs:
+      total_channels: ${{ steps.generate.outputs.total_channels }}
+
+    steps:
+      - name: Checkout target branch
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.inputs.target_branch || 'main' }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - id: generate
+        name: Generate tamil.m3u
+        env:
+          JSON_URL: ${{ github.event.inputs.json_url || 'https://playify.pages.dev/Jiotv.json' }}
+          TARGET_COUNT: '12'
+        run: |
+          set -euo pipefail
+          echo "📥 Fetching JSON from: $JSON_URL"
+          JSON=$(curl -fsSL --max-time 30 \
+            -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36" \
+            -H "Accept: application/json" \
+            -H "Referer: https://playify.pages.dev/" \
+            "$JSON_URL") || { echo "❌ Failed to fetch JSON (curl error)"; exit 1; }
+          if [ -z "$JSON" ] || [ "${JSON:0:1}" = "<" ]; then
+            echo "❌ Response is empty or looks like HTML"
+            exit 1
+          fi
+
+          echo "#EXTM3U" > tamil.m3u
+
+          # Updated channel target list (from your input)
+          echo "$JSON" | jq -r '
+            def channels:
+              if type == "array" then .
+              elif type == "object" then
+                if has("channels") and (.channels | type == "array") then .channels
+                elif has("data") and (.data | type == "array") then .data
+                elif has("list") and (.list | type == "array") then .list
+                elif (.[] | type == "object") then [.[]]
+                else []
+                end
+              else []
+              end;
+            [
+              "KTV HD",
+              "Tamil Janam",
+              "Raj News Tamil",
+              "Jaya Plus",
+              "Animal Planet HD",
+              "Discovery HD",
+              "Eurosport HD",
+              "Nick Jr",
+              "Sonic Tamil",
+              "Pogo Tamil",
+              "Cartoon Network",
+              "Nick Tamil"
+            ] as $list |
+            channels as $all |
+            $list[] as $target |
+            ($all | map(select((.name // .title // "") | ascii_downcase == ($target | ascii_downcase)) ) | .[0]) as $match |
+            if ($match | type == "object") and ($match.link // $match.url // "") != "" then
+              $match |
+              (.name // .title // $target) as $name |
+              (.tvg_id // .tvgId // .id // "") as $tvg_id |
+              (.tvg_logo // .logo // .icon // "") as $tvg_logo |
+              (.drmScheme // .drm_scheme // .drm // "") as $drmScheme |
+              (.drmLicense // .license // "") as $drmLicense |
+              (.cookie // .cookies // "") as $cookie |
+              (.link // .url // .stream_url // .hls // .mpd // "") as $link |
+              "#EXTINF:-1 " +
+                (if ($tvg_id | length > 0) then "tvg-id=\"\($tvg_id)\" " else "" end) +
+                "group-title=\"Tamil\" " +
+                (if ($tvg_logo | length > 0) then "tvg-logo=\"\($tvg_logo)\" " else "" end) +
+                ",\($name | gsub(","; "\\,"))" |
+              . as $extinf |
+              (if ($drmScheme == "clearkey") and ($drmLicense | test("^[a-zA-Z0-9]+:[a-zA-Z0-9]+")) then
+                "#KODIPROP:inputstream.adaptive.license_type=clearkey\n#KODIPROP:inputstream.adaptive.license_key=" +
+                ($drmLicense | split(":")[0:2] | join(":"))
+              else "" end) as $drm |
+              "#EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69" as $ua |
+              (if ($cookie | length > 0) then
+                "#EXTHTTP:{\"cookie\":\"" + ($cookie | gsub("\""; "\\\"")) + "\"}"
+              else "" end) as $cookie_line |
+              [
+                $extinf,
+                ($drm | select(. != "")),
+                $ua,
+                ($cookie_line | select(. != "")),
+                $link
+              ] | join("\n")
+            else empty end
+          ' >> tamil.m3u
+
+          # Final report and output
+          TOTAL=$(grep -c "^#EXTINF" tamil.m3u || echo 0)
+          echo "✅ tamil.m3u created: $TOTAL / ${TARGET_COUNT} channels found"
+          if [ "$TOTAL" -gt 0 ]; then
+            echo "📋 Channels included:"
+            grep "^#EXTINF" tamil.m3u | sed 's/.*,//'
+          else
+            echo "❌ None of the target channels were found in JSON"
+            echo "🔍 Top 20 channel names in JSON (best-effort):"
+            echo "$JSON" | jq -r 'if type == "array" then .[0:20][] | .name // .title // "–" elif type == "object" then (if has("channels") then .channels[0:20][] else (if has("data") then .data[0:20][] else (if has("list") then .list[0:20][] else (.[] | .name // .title // "–") end) end) end) else "–" end' 2>/dev/null
+          fi
+
+          # Export total as step output (use GITHUB_OUTPUT file)
+          echo "total_channels=$TOTAL" >> "$GITHUB_OUTPUT"
+
+      - name: Commit & Push (if changes)
+        if: ${{ always() }}
+        env:
+          TARGET_BRANCH: ${{ github.event.inputs.target_branch || 'main' }}
+          TOTAL: ${{ steps.generate.outputs.total_channels }}
+          TARGET_COUNT: '12'
+        run: |
+          # Only commit if there are changes
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tamil.m3u || true
+          if git diff --cached --quiet; then
+            echo "➡️ No changes — skipping commit"
+            exit 0
+          fi
+          git commit -m "✅ Auto-update Tamil M3U: ${TOTAL}/${TARGET_COUNT} channels | $(date -u '+%Y-%m-%d %H:%M')"
+          git push origin "HEAD:${TARGET_BRANCH}"
+
+      - name: Report result
+        if: ${{ steps.generate.outputs.total_channels != '' }}
+        run: echo "Finished — total channels: ${{ steps.generate.outputs.total_channels }}"
