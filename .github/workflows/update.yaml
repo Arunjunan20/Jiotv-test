@@ -38,7 +38,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y jq
 
       - id: generate
-        name: Generate tamil.m3u
+        name: Generate Test.m3u
         env:
           JSON_URL: ${{ github.event.inputs.json_url || 'https://playify.pages.dev/Jiotv.json' }}
           TARGET_COUNT: '12'
@@ -55,7 +55,7 @@ jobs:
             exit 1
           fi
 
-          echo "#EXTM3U" > tamil.m3u
+          echo "#EXTM3U" > Test.m3u
 
           # Updated channel target list (from your input)
           echo "$JSON" | jq -r '
@@ -118,41 +118,29 @@ jobs:
                 $link
               ] | join("\n")
             else empty end
-          ' >> tamil.m3u
-
-          # Final report and output
-          TOTAL=$(grep -c "^#EXTINF" tamil.m3u || echo 0)
-          echo "✅ tamil.m3u created: $TOTAL / ${TARGET_COUNT} channels found"
+          ' >> Test.m3u
+          # Final report
+          TOTAL=$(grep -c "^#EXTINF" Test.m3u || echo 0)
+          echo "✅ tamil.m3u created: $TOTAL / 31 channels found"
           if [ "$TOTAL" -gt 0 ]; then
             echo "📋 Channels included:"
-            grep "^#EXTINF" tamil.m3u | sed 's/.*,//'
+            grep "^#EXTINF" Test.m3u | sed 's/.*,//'
           else
-            echo "❌ None of the target channels were found in JSON"
-            echo "🔍 Top 20 channel names in JSON (best-effort):"
-            echo "$JSON" | jq -r 'if type == "array" then .[0:20][] | .name // .title // "–" elif type == "object" then (if has("channels") then .channels[0:20][] else (if has("data") then .data[0:20][] else (if has("list") then .list[0:20][] else (.[] | .name // .title // "–") end) end) end) else "–" end' 2>/dev/null
+            echo "❌ None of the 31 channels were found in Ziotv.json"
+            echo "🔍 Top 20 channel names in JSON:"
+            echo "$JSON" | jq -r 'channels | .[0:20][] | .name // .title // "–"' 2>/dev/null
+            exit 1
           fi
-
-          # Export total as step output (use GITHUB_OUTPUT file)
-          echo "total_channels=$TOTAL" >> "$GITHUB_OUTPUT"
-
-      - name: Commit & Push (if changes)
-        if: ${{ always() }}
-        env:
-          TARGET_BRANCH: ${{ github.event.inputs.target_branch || 'main' }}
-          TOTAL: ${{ steps.generate.outputs.total_channels }}
-          TARGET_COUNT: '12'
+      - name: Commit & Push
         run: |
-          # Only commit if there are changes
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add tamil.m3u || true
+          git add Test.m3u
           if git diff --cached --quiet; then
             echo "➡️ No changes — skipping commit"
             exit 0
           fi
-          git commit -m "✅ Auto-update Tamil M3U: ${TOTAL}/${TARGET_COUNT} channels | $(date -u '+%Y-%m-%d %H:%M')"
-          git push origin "HEAD:${TARGET_BRANCH}"
+          git commit -m "✅ Auto-update Tamil M3U: $TOTAL/31 channels | $(date -u '+%Y-%m-%d %H:%M')"
+          git push origin main
 
-      - name: Report result
-        if: ${{ steps.generate.outputs.total_channels != '' }}
-        run: echo "Finished — total channels: ${{ steps.generate.outputs.total_channels }}"
+          
