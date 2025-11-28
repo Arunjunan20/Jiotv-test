@@ -29,12 +29,12 @@ https://jiotvbpkmob.cdn.jio.com/bpk-tv/Pogo_Hindi_MOB/WDVLive/index.mpd
 #EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
 #EXTHTTP:{"cookie":"__hdnea__=st=1764304207~exp=1764390607~acl=/*~hmac=5f936234ecfaed0b2d7349facc80b7e77ee007b65e037d99f96d6764dadc1b55"}
 https://jiotvbpkmob.cdn.jio.com/bpk-tv/Janam_Tamil_BTS/output/index.mpd
-#EXTINF:-1 group-title="News" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Jaya_Plus.png" ,Jaya Plus
+#EXTINF:-1 group-title="News" tvg-logo="https://img.media.jio.com/tvpimages/2/59/301888_1732644604478_l_high.jpg" ,Jaya Plus
 #KODIPROP:inputstream.adaptive.license_type=clearkey
-#KODIPROP:inputstream.adaptive.license_key=e1aefaf169735829b2a6fb77e403eac2:941252b4e0873390b6909258b7fc5b89
+#KODIPROP:inputstream.adaptive.license_key=8f05deb695d2502a9cdcddc66efe0c8b:ac0f164b3bd469067f91ab3cd20823ef
 #EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
 #EXTHTTP:{"cookie":"__hdnea__=st=1764304207~exp=1764390607~acl=/*~hmac=5f936234ecfaed0b2d7349facc80b7e77ee007b65e037d99f96d6764dadc1b55"}
-https://jiotvbpkmob.cdn.jio.com/bpk-tv/Jaya_Plus_MOB/WDVLive/index.mpd
+https://jiotvbpkmob.cdn.jio.com/bpk-tv/Jaya_Plus_BTS/output/index.mpd
 #EXTINF:-1 group-title="Infotainment" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Animal_Planet_HD.png" ,Animal Planet HD
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=ff6ca7035f7d51609b43960e3b88fc94:e2c4e61e32022885f6ccb9215b60dad4
@@ -59,12 +59,12 @@ https://jiotvbpkmob.cdn.jio.com/bpk-tv/Nick_Junior_BTS/output/index.mpd
 #EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
 #EXTHTTP:{"cookie":"__hdnea__=st=1764304207~exp=1764390607~acl=/*~hmac=5f936234ecfaed0b2d7349facc80b7e77ee007b65e037d99f96d6764dadc1b55"}
 https://jiotvbpkmob.cdn.jio.com/bpk-tv/Discovery_HD_World_BTS/output/index.mpd
-#EXTINF:-1 group-title="Regional Tamil" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Jaya_TV_HD.png" ,Jaya TV HD
+#EXTINF:-1 group-title="Regional Tamil" tvg-logo="https://img.media.jio.com/tvpimages/74/78/301887_1732644338482_l_high.jpg" ,Jaya TV HD
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=b53a72551ecd5f5a93785ab2eea2c04a:91c08ce0ece5d6c8c167b104a7c9ab00
 #EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
 #EXTHTTP:{"cookie":"__hdnea__=st=1764304207~exp=1764390607~acl=/*~hmac=5f936234ecfaed0b2d7349facc80b7e77ee007b65e037d99f96d6764dadc1b55"}
-https://jiotvbpkmob.cdn.jio.com/bpk-tv/Jaya_TV_HD_MOB/WDVLive/index.mpd
+https://jiotvbpkmob.cdn.jio.com/bpk-tv/Jaya_TV_HD_BTS/output/index.mpd
 #EXTINF:-1 group-title="Regional Tamil" tvg-logo="https://img.media.jio.com/imagespublic/72/8/301190_1645624698416_l_high.jpg" ,Raj TV
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=3b214e599f3f5fb3abd92164fa152caf:ec6050021a558cd31511717e1c0912e6
@@ -77,12 +77,12 @@ https://jiotvbpkmob.cdn.jio.com/bpk-tv/Raj_TV_BTS/output/index.mpd
 #EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
 #EXTHTTP:{"cookie":"__hdnea__=st=1764304207~exp=1764390607~acl=/*~hmac=5f936234ecfaed0b2d7349facc80b7e77ee007b65e037d99f96d6764dadc1b55"}
 https://jiotvbpkmob.cdn.jio.com/bpk-tv/Sun_Music_HD_MOB/WDVLive/index.mpd
-#EXTINF:-1 group-title="Regional Tamil" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Jaya_Max.png" ,Jaya Max
+#EXTINF:-1 group-title="Regional Tamil" tvg-logo="https://img.media.jio.com/tvpimages/95/92/301889_1732644802457_l_high.jpg" ,Jaya Max
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=fac51ad9458958668729ddf5ac67a9ae:39fe92ea06365c6f01987739a48e9798
 #EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
 #EXTHTTP:{"cookie":"__hdnea__=st=1764304207~exp=1764390607~acl=/*~hmac=5f936234ecfaed0b2d7349facc80b7e77ee007b65e037d99f96d6764dadc1b55"}
-https://jiotvbpkmob.cdn.jio.com/bpk-tv/Jaya_Max_MOB/WDVLive/index.mpd
+https://jiotvbpkmob.cdn.jio.com/bpk-tv/Jaya_Max_BTS/output/index.mpd
 #EXTINF:-1 group-title="Regional Tamil" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Sun_Life.png" ,Sun Life
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=03fff2c1ecea574b98da00b05c2a0be9:41670b42142fa8ba6bd3cf9fc2ae8cf5
