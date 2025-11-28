@@ -57,7 +57,7 @@ jobs:
             {"name": "Pogo Hindi", "group": "Kids"},
             {"name": "Tamil Janam", "group": "News"},
             {"name": "Jaya Plus", "group": "News"},
-            {"name": "Animal Planet HD", "group": "Infotainment"},
+            {"name": "Animal Planet HD World", "group": "Infotainment"},
             {"name": "Eurosport HD", "group": "Sports"},
             {"name": "Nick Jr", "group": "Kids"},
             {"name": "Discovery HD World", "group": "Infotainment"},
