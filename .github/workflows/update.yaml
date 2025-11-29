@@ -64,7 +64,9 @@ jobs:
             {"name": "Travelxp Tamil", "group": "Regional Tamil"},
             {"name": "Puthu Yugam", "group": "Tamil"},
             {"name": "Thanthi One", "group": "Tamil"},
-            {"name": "Tunes 6", "group": "Music"}
+            {"name": "Tunes 6", "group": "Music"},
+            {"name": "Jio Specials HD", "group": "Infotainment"},
+            {"name": "Jio Sports HD", "group": "Sports"}
           ]'
 
           # 2. Calculate count dynamically
