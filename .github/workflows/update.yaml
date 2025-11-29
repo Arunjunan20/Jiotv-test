@@ -46,17 +46,17 @@ jobs:
         run: |
           set -euo pipefail
 
-          # 1. Define the Target List (Syntax Fixed)
+          # 1. Define the Target List
           TARGET_CHANNELS='[
             {"name": "Raj News 24x7", "group": "News"},
             {"name": "Sonic Hindi", "group": "Kids"},
             {"name": "Cartoon Network", "group": "Kids"},
-            {"name": "Nickelodeon", "group": "Kids"},
+            {"name": "Nick Hindi", "group": "Kids"},
             {"name": "D Tamil", "group": "Regional Tamil"},
-            {"name": "Pogo Hindi", "group": "Kids"},
+            {"name": "Pogo", "group": "Kids"},
             {"name": "Tamil Janam", "group": "News"},
             {"name": "Jaya Plus", "group": "News"},
-            {"name": "Animal Planet HD", "group": "Infotainment"},
+            {"name": "Animal Planet HD World", "group": "Infotainment"},
             {"name": "Eurosport HD", "group": "Sports"},
             {"name": "Nick Jr", "group": "Kids"},
             {"name": "Nick HD+", "group": "Kids"},
