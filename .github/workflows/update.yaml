@@ -19,7 +19,7 @@ on:
         required: false
         default: 'main'
   schedule:
-    # UPDATED: Run every 3 hours (at minute 0)
+    # Run every 3 hours at minute 0 (00:00, 03:00, 06:00...)
     - cron: '0 */3 * * *'
 
 jobs:
@@ -46,27 +46,25 @@ jobs:
         run: |
           set -euo pipefail
 
-          # 1. Define the Target List
+          # 1. Define the Target List (Syntax Fixed)
           TARGET_CHANNELS='[
-            {"name": "KTV HD", "group": "Movies"},
             {"name": "Raj News Tamil", "group": "News"},
             {"name": "Sonic Hindi", "group": "Kids"},
-            {"name": "Cartoon Network Hindi", "group": "Kids"},
-            {"name": "Nickelodeon Hindi", "group": "Kids"},
+            {"name": "Cartoon Network", "group": "Kids"},
+            {"name": "Nickelodeon", "group": "Kids"},
             {"name": "Discovery Tamil", "group": "Regional Tamil"},
             {"name": "Pogo Hindi", "group": "Kids"},
             {"name": "Tamil Janam", "group": "News"},
             {"name": "Jaya Plus", "group": "News"},
-            {"name": "Animal Planet HD World", "group": "Infotainment"},
+            {"name": "Animal Planet HD", "group": "Infotainment"},
             {"name": "Eurosport HD", "group": "Sports"},
             {"name": "Nick Jr", "group": "Kids"},
+            {"name": "Nick HD+", "group": "Kids"},
             {"name": "Discovery HD World", "group": "Infotainment"},
-            {"name": "Jaya TV HD", "group": "Regional Tamil"},
-            {"name": "Raj TV", "group": "Regional Tamil"},
-            {"name": "Sun Music HD", "group": "Regional Tamil"},
-            {"name": "Jaya Max", "group": "Regional Tamil"},
-            {"name": "Sun Life", "group": "Regional Tamil"},
-            {"name": "Travelxp Tamil", "group": "Regional Tamil"}
+            {"name": "Travelxp Tamil", "group": "Regional Tamil"},
+            {"name": "Puthu Yugam", "group": "Tamil"},
+            {"name": "Thanthi One", "group": "Tamil"},
+            {"name": "Tunes 6", "group": "Music"}
           ]'
 
           # 2. Calculate count dynamically
@@ -89,7 +87,7 @@ jobs:
           # 4. Create M3U File
           echo "#EXTM3U" > Test.m3u
 
-          # 5. Process JSON with jq (BTS Priority + Dynamic Groups)
+          # 5. Process JSON with jq
           echo "$JSON" | jq -r --argjson list "$TARGET_CHANNELS" '
             def channels:
               if type == "array" then .
@@ -108,7 +106,7 @@ jobs:
             $target_obj.name as $target_name |
             $target_obj.group as $target_group | 
             
-            # MATCHING LOGIC: Finds matches and sorts them so "BTS" links come first
+            # Match Logic: Find channel by name (case-insensitive) -> Prioritize BTS links
             ($all | 
              map(select((.name // .title // "") | ascii_downcase == ($target_name | ascii_downcase))) | 
              sort_by(if (.link | contains("BTS")) then 0 else 1 end) | 
@@ -117,7 +115,10 @@ jobs:
             
             if ($match | type == "object") and ($match.link // $match.url // "") != "" then
               $match |
-              (.name // .title // $target_name) as $name |
+              
+              # PRESERVE YOUR NAME (Ignore JSON source name)
+              $target_name as $name |
+
               (.tvg_id // .tvgId // .id // "") as $tvg_id |
               (.tvg_logo // .logo // .icon // "") as $tvg_logo |
               (.drmScheme // .drm_scheme // .drm // "") as $drmScheme |
