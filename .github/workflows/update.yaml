@@ -48,11 +48,11 @@ jobs:
 
           # 1. Define the Target List (Syntax Fixed)
           TARGET_CHANNELS='[
-            {"name": "Raj News Tamil", "group": "News"},
+            {"name": "Raj News 24x7", "group": "News"},
             {"name": "Sonic Hindi", "group": "Kids"},
             {"name": "Cartoon Network", "group": "Kids"},
             {"name": "Nickelodeon", "group": "Kids"},
-            {"name": "Discovery Tamil", "group": "Regional Tamil"},
+            {"name": "D Tamil", "group": "Regional Tamil"},
             {"name": "Pogo Hindi", "group": "Kids"},
             {"name": "Tamil Janam", "group": "News"},
             {"name": "Jaya Plus", "group": "News"},
