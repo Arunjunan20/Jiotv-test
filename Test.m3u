@@ -23,7 +23,7 @@ https://jiotvbpkmob.cdn.jio.com/bpk-tv/Cartoon_Network_Hindi_BTS/output/index.mp
 #EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
 #EXTHTTP:{"cookie":"__hdnea__=st=1764371405~exp=1764457805~acl=/*~hmac=3f6d6a7c1db38215bbf485ecd54c6bf36c69b87a71524fdaac243799f7c93bf7"}
 https://jiotvbpkmob.cdn.jio.com/bpk-tv/Discovery_Channel_Tamil_BTS/output/index.mpd
-#EXTINF:-1 group-title="Kids" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Pogo_Hindi.png" ,Pogo Hindi
+#EXTINF:-1 group-title="Kids" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Pogo_Hindi.png" ,Pogo
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=e00e2372e66056d99642254b92bcf53e:70dc00e600e4a4c16afc0148ad2e8881
 #EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
@@ -41,7 +41,7 @@ https://jiotvbpkmob.cdn.jio.com/bpk-tv/Janam_Tamil_BTS/output/index.mpd
 #EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
 #EXTHTTP:{"cookie":"__hdnea__=st=1764371405~exp=1764457805~acl=/*~hmac=3f6d6a7c1db38215bbf485ecd54c6bf36c69b87a71524fdaac243799f7c93bf7"}
 https://jiotvbpkmob.cdn.jio.com/bpk-tv/Jaya_Plus_BTS/output/index.mpd
-#EXTINF:-1 group-title="Infotainment" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Animal_Planet_HD.png" ,Animal Planet HD
+#EXTINF:-1 group-title="Infotainment" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Animal_Planet_HD.png" ,Animal Planet HD World
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 #KODIPROP:inputstream.adaptive.license_key=ff6ca7035f7d51609b43960e3b88fc94:e2c4e61e32022885f6ccb9215b60dad4
 #EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
@@ -89,3 +89,22 @@ https://jiotvbpkmob.cdn.jio.com/bpk-tv/Puthu_Yugam_BTS/output/index.mpd
 #EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
 #EXTHTTP:{"cookie":"__hdnea__=st=1764371405~exp=1764457805~acl=/*~hmac=3f6d6a7c1db38215bbf485ecd54c6bf36c69b87a71524fdaac243799f7c93bf7"}
 https://jiotvbpkmob.cdn.jio.com/bpk-tv/Tunes_6_BTS/output/index.mpd
+#EXTINF:-1 group-title="Kids" tvg-logo="https://img.media.jio.com/tvpimages/78/19/301116_1754453914842_l_high.jpg" ,Nick
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=b0c237a374cd57bb80afeec16f6ab680:08dab9f7242dbd95f1e494a96f6fdad8
+#EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
+#EXTHTTP:{"cookie":"__hdnea__=st=1764371405~exp=1764457805~acl=/*~hmac=3f6d6a7c1db38215bbf485ecd54c6bf36c69b87a71524fdaac243799f7c93bf7"}
+https://jiotvbpkmob.cdn.jio.com/bpk-tv/Tunes_6_BTS/output/index.mpd
+#EXTINF:-1 group-title="Sports" tvg-logo="https://img.media.jio.com/tvpimages/78/19/301116_1754453914842_l_high.jpg" ,Jio Sports HD
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=b0c237a374cd57bb80afeec16f6ab680:08dab9f7242dbd95f1e494a96f6fdad8
+#EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
+#EXTHTTP:{"cookie":"__hdnea__=st=1764371405~exp=1764457805~acl=/*~hmac=3f6d6a7c1db38215bbf485ecd54c6bf36c69b87a71524fdaac243799f7c93bf7"}
+https://jiotvbpkmob.cdn.jio.com/bpk-tv/Tunes_6_BTS/output/index.mpd
+#EXTINF:-1 group-title="Infotainment" tvg-logo="https://img.media.jio.com/tvpimages/78/19/301116_1754453914842_l_high.jpg" ,Jio Specials HD
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+#KODIPROP:inputstream.adaptive.license_key=b0c237a374cd57bb80afeec16f6ab680:08dab9f7242dbd95f1e494a96f6fdad8
+#EXTVLCOPT:http-user-agent=plaYtv/7.1.5%20(Linux%3BAndroid%2015)%20ExoPlayerLib/2.11.6%20YGX/69.69.69.69
+#EXTHTTP:{"cookie":"__hdnea__=st=1764371405~exp=1764457805~acl=/*~hmac=3f6d6a7c1db38215bbf485ecd54c6bf36c69b87a71524fdaac243799f7c93bf7"}
+https://jiotvbpkmob.cdn.jio.com/bpk-tv/Tunes_6_BTS/output/index.mpd
+
